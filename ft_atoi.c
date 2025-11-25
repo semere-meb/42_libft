@@ -1,26 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: semebrah <semebrah@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 13:34:16 by semebrah          #+#    #+#             */
-/*   Updated: 2025/11/25 15:49:11 by semebrah         ###   ########.fr       */
+/*   Created: 2025/11/25 16:06:02 by semebrah          #+#    #+#             */
+/*   Updated: 2025/11/25 16:06:27 by semebrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_islower(int c)
+#include "libft.h"
+
+static int	ft_isspace(int c)
 {
-	return (c >= 'a' && c <= 'z');
+	return (c == 32 || (c >= 9 && c <= 13));
 }
 
-static int	ft_isupper(int c)
+int	ft_atoi(const char *nptr)
 {
-	return (c >= 'A' && c <= 'Z');
-}
+	size_t	i;
+	int		res;
+	int		sign;
 
-int	ft_isalpha(int c)
-{
-	return (ft_islower(c) || ft_isupper(c));
+	i = 0;
+	res = 0;
+	sign = 1;
+	while (ft_isspace(nptr[i]))
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (ft_isdigit(nptr[i]))
+	{
+		res = res * 10 + nptr[i] - '0';
+		i++;
+	}
+	return (res * sign);
 }

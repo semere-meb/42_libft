@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: semebrah <semebrah@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 13:34:16 by semebrah          #+#    #+#             */
-/*   Updated: 2025/11/25 15:49:11 by semebrah         ###   ########.fr       */
+/*   Created: 2025/11/25 15:51:34 by semebrah          #+#    #+#             */
+/*   Updated: 2025/11/25 15:52:39 by semebrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_islower(int c)
-{
-	return (c >= 'a' && c <= 'z');
-}
+#include "libft.h"
 
-static int	ft_isupper(int c)
+int	ft_isalnum(int c)
 {
-	return (c >= 'A' && c <= 'Z');
-}
-
-int	ft_isalpha(int c)
-{
-	return (ft_islower(c) || ft_isupper(c));
+	return (ft_isalpha(c) || ft_isdigit(c));
 }

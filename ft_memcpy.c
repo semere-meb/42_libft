@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: semebrah <semebrah@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 13:34:16 by semebrah          #+#    #+#             */
-/*   Updated: 2025/11/25 15:49:11 by semebrah         ###   ########.fr       */
+/*   Created: 2025/11/25 15:57:28 by semebrah          #+#    #+#             */
+/*   Updated: 2025/11/25 15:57:40 by semebrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_islower(int c)
-{
-	return (c >= 'a' && c <= 'z');
-}
+#include "libft.h"
 
-static int	ft_isupper(int c)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	return (c >= 'A' && c <= 'Z');
-}
+	size_t	i;
 
-int	ft_isalpha(int c)
-{
-	return (ft_islower(c) || ft_isupper(c));
+	i = 0;
+	while (i < n)
+	{
+		((char *)dest)[i] = ((char *)src)[i];
+		i++;
+	}
+	return (dest);
 }

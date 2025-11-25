@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: semebrah <semebrah@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 13:34:16 by semebrah          #+#    #+#             */
-/*   Updated: 2025/11/25 15:49:11 by semebrah         ###   ########.fr       */
+/*   Created: 2025/11/25 15:55:52 by semebrah          #+#    #+#             */
+/*   Updated: 2025/11/25 15:56:12 by semebrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_islower(int c)
-{
-	return (c >= 'a' && c <= 'z');
-}
+#include "libft.h"
 
-static int	ft_isupper(int c)
+void	ft_bzero(void *s, size_t n)
 {
-	return (c >= 'A' && c <= 'Z');
-}
-
-int	ft_isalpha(int c)
-{
-	return (ft_islower(c) || ft_isupper(c));
+	ft_memset(s, 0, n);
 }

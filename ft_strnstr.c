@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: semebrah <semebrah@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 13:34:16 by semebrah          #+#    #+#             */
-/*   Updated: 2025/11/25 15:49:11 by semebrah         ###   ########.fr       */
+/*   Created: 2025/11/25 16:04:45 by semebrah          #+#    #+#             */
+/*   Updated: 2025/11/25 16:05:01 by semebrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_islower(int c)
-{
-	return (c >= 'a' && c <= 'z');
-}
+#include "libft.h"
 
-static int	ft_isupper(int c)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	return (c >= 'A' && c <= 'Z');
-}
+	size_t	i;
+	size_t	l_len;
 
-int	ft_isalpha(int c)
-{
-	return (ft_islower(c) || ft_isupper(c));
+	i = 0;
+	l_len = ft_strlen(little);
+	while (i < len - l_len)
+	{
+		if (ft_strncmp(&big[i], little, len))
+			return ((char *)(big + i));
+		i++;
+	}
+	return (NULL);
 }

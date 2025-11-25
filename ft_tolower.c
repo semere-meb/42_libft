@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: semebrah <semebrah@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 13:34:16 by semebrah          #+#    #+#             */
-/*   Updated: 2025/11/25 15:49:11 by semebrah         ###   ########.fr       */
+/*   Created: 2025/11/25 16:00:28 by semebrah          #+#    #+#             */
+/*   Updated: 2025/11/25 16:02:15 by semebrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-static int	ft_islower(int c)
-{
-	return (c >= 'a' && c <= 'z');
-}
 
 static int	ft_isupper(int c)
 {
 	return (c >= 'A' && c <= 'Z');
 }
 
-int	ft_isalpha(int c)
+int	ft_tolower(int c)
 {
-	return (ft_islower(c) || ft_isupper(c));
+	if (ft_isupper(c))
+		c += 32;
+	return (c);
 }
