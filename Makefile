@@ -41,7 +41,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 %.o: %.c
-	$(COMPILE) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	ar rcs $@ $^
