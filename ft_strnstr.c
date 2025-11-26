@@ -18,7 +18,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 
 	i = 0;
 	if (len == 0)
-		return (char *)big;
+		return ((char *)big);
 	while (i < len)
 	{
 		if (ft_strncmp(&big[i], little, len) == 0)
