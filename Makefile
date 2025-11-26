@@ -37,11 +37,12 @@ SRCS = ft_atoi.c \
 	ft_toupper.c
 
 OBJS = $(SRCS:.c=.o)
+HEADER = libft.h
 
 all: $(NAME)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.c $(HEADER)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(NAME): $(OBJS)
 	ar rcs $@ $^
