@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: semebrah <semebrah@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/26 17:26:37 by semebrah          #+#    #+#             */
-/*   Updated: 2025/11/27 13:03:17 by semebrah         ###   ########.fr       */
+/*   Created: 2025/11/27 13:20:58 by semebrah          #+#    #+#             */
+/*   Updated: 2025/11/27 13:25:40 by semebrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	ft_putnbr_fd(int n, int fd)
 {
-	void	*res;
-	size_t	s;
+	long	_n;
 
-	s = nmemb * size;
-	if (s > 0 && s / nmemb != size)
-		return (NULL);
-	res = malloc(s);
-	if (!res)
-		return (NULL);
-	ft_bzero(res, s);
-	return (res);
+	_n = n;
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		_n *= -1;
+	}
+	while (n > 0)
+		ft_putnbr_fd(_n / 10, fd);
+	write(fd, (char []){'0' + _n % 10}, 1);
 }

@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: semebrah <semebrah@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/26 17:26:37 by semebrah          #+#    #+#             */
-/*   Updated: 2025/11/27 13:03:17 by semebrah         ###   ########.fr       */
+/*   Created: 2025/11/27 15:01:15 by semebrah          #+#    #+#             */
+/*   Updated: 2025/11/27 15:19:15 by semebrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-void	*ft_calloc(size_t nmemb, size_t size)
+int	ft_lstsize(t_list *lst)
 {
-	void	*res;
-	size_t	s;
+	int		len;
+	t_list	*head;
 
-	s = nmemb * size;
-	if (s > 0 && s / nmemb != size)
-		return (NULL);
-	res = malloc(s);
-	if (!res)
-		return (NULL);
-	ft_bzero(res, s);
-	return (res);
+	len = 0;
+	head = lst;
+	while (head)
+	{
+		len++;
+		head = head->next;
+	}
+	return (len);
 }

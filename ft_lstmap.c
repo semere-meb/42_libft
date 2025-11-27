@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: semebrah <semebrah@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/26 17:26:37 by semebrah          #+#    #+#             */
-/*   Updated: 2025/11/27 13:03:17 by semebrah         ###   ########.fr       */
+/*   Created: 2025/11/27 15:57:26 by semebrah          #+#    #+#             */
+/*   Updated: 2025/11/27 16:40:23 by semebrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-void	*ft_calloc(size_t nmemb, size_t size)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	void	*res;
-	size_t	s;
+	t_list	*new;
+	t_list	*head_lst;
+	t_list	*head_new;
 
-	s = nmemb * size;
-	if (s > 0 && s / nmemb != size)
+	if (!lst || !f || !del)
 		return (NULL);
-	res = malloc(s);
-	if (!res)
-		return (NULL);
-	ft_bzero(res, s);
-	return (res);
+	new = malloc(sizeof(size_t));
+	head_lst = lst;
+	head_new = new;
+	while (head_lst)
+	{
+		head_new = malloc(sizeof(t_list));
+		head_new->content = head_lst->content;
+		head_new->next = NULL;
+		f(head_new);
+		head_lst = head_lst->next;
+		head_new = head_new->next;
+	}
+	return (new);
 }

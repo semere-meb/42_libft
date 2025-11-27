@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: semebrah <semebrah@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/26 17:26:37 by semebrah          #+#    #+#             */
-/*   Updated: 2025/11/27 13:03:17 by semebrah         ###   ########.fr       */
+/*   Created: 2025/11/27 09:56:39 by semebrah          #+#    #+#             */
+/*   Updated: 2025/11/27 10:09:33 by semebrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-void	*ft_calloc(size_t nmemb, size_t size)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	void	*res;
-	size_t	s;
+	size_t	i;
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*new;
 
-	s = nmemb * size;
-	if (s > 0 && s / nmemb != size)
+	i = 0;
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	new = malloc(s1_len + s2_len + 1);
+	if (!new)
 		return (NULL);
-	res = malloc(s);
-	if (!res)
-		return (NULL);
-	ft_bzero(res, s);
-	return (res);
+	while (i < s1_len)
+	{
+		new[i] = s1[i];
+		i++;
+	}
+	while (i - s1_len < s2_len)
+	{
+		new[i] = s2[i - s1_len];
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
 }
