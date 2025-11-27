@@ -48,11 +48,9 @@ static size_t	ft_count_chars(long _n)
 char	*ft_itoa(int n)
 {
 	long	_n;
-	size_t	i;
 	char	*str;
 
 	_n = n;
-	i = 0;
 	if (_n < 0)
 		_n *= -1;
 	str = malloc((n < 0) + ft_count_chars(_n) + 1);

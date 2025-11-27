@@ -51,7 +51,7 @@ SRCS = ft_atoi.c \
 
 OBJS = $(SRCS:.c=.o)
 
-BONUSES = ft_lstadd_back.c \
+BONUS_SRCS = ft_lstadd_back.c \
 	ft_lstclear.c \
 	ft_lstdelnode.c \
 	ft_lstdelone.c \
@@ -61,7 +61,7 @@ BONUSES = ft_lstadd_back.c \
 	ft_lstnew.c \
 	ft_lstsize.c
 
-BOBJS = $(BONUSES:.c=.o)
+BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
 HEADER = libft.h
 
@@ -73,11 +73,11 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rcs $@ $^
 
-bonus: $(BOBJS)
+bonus: $(BONUS_OBJS)
 	ar rcs $(NAME) $^
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
 	rm -f $(NAME)
