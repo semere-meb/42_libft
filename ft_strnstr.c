@@ -15,14 +15,23 @@
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
+	size_t	len_cmp;
+	size_t	little_len;
 
-	if (len == 0)
-		return ((char *)big);
 	i = 0;
-	while (i < len)
+	little_len = ft_strlen(little);
+	if (!big || !little)
+		return (NULL);
+	if (!little[i])
+		return ((char *)big);
+	if (len < little_len)
+		len_cmp = len;
+	else
+		len_cmp = little_len;
+	while (len && i < len && big[i] && len >= little_len)
 	{
-		if (ft_strncmp(&big[i], little, len) == 0)
-			return ((char *)(big + i));
+		if (!ft_strncmp(&big[i], little, len_cmp))
+			return ((char *)(&big[i]));
 		i++;
 	}
 	return (NULL);
