@@ -37,5 +37,5 @@ char	*ft_strtrim(char const *s1, char const *set)
 		left++;
 	while (left < right && ft_ismember(s1[right], set))
 		right--;
-	return (ft_substr(s1, left, right));
+	return (ft_substr(s1, left, right - left));
 }
