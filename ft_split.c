@@ -10,88 +10,96 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+#include <stdio.h>
 #include <stdlib.h>
 
-static size_t	ft_count_words(const char *s, char c)
+size_t	ft_count_words(char const *s, char c)
 {
-	size_t	words;
-	size_t	i;
-
-	words = 0;
-	i = 0;
-	while (s[i])
-	{
-		while (s[i] == c)
-			i++;
-		while (s[i] && s[i] != c)
-			i++;
-		words++;
-	}
-	return (words);
-}
-
-static char	*ft_allocate_str(const char *s, size_t start, size_t end)
-{
-	char	*new;
-
-	new = malloc(end - start);
-	if (!new)
-		return (NULL);
-	while (start < end && s[start])
-	{
-		new[start] = s[start];
-		start++;
-	}
-	return (new);
-}
-
-static char	**ft_clean(char **str_arr, size_t words)
-{
-	while (words >= 0)
-	{
-		free(str_arr[words]);
-		words--;
-	}
-	free(str_arr);
-	return (NULL);
-}
-
-static char	**ft_allocate_arr(char **str_arr, const char *s, char c)
-{
-	size_t	words;
+	size_t	wordcount;
 	size_t	i;
 	size_t	start;
-	size_t	end;
 
-	words = 0;
+	wordcount = 0;
 	i = 0;
 	while (s[i])
 	{
-		while (s[i] == c)
-			i++;
-		start = i;
 		while (s[i] && s[i] != c)
 			i++;
-		end = i;
-		str_arr[words] = ft_allocate_str(s, start, end);
-		if (!str_arr[words])
-			return (ft_clean(str_arr, words));
-		words++;
+		start = 0;
+		while (s[i] && s[i] == c)
+			i++;
+		if (i > start)
+			wordcount++;
 	}
-	str_arr[words] = NULL;
-	return (str_arr);
+	return (wordcount);
+}
+
+char	*ft_assign_str(char const *s, size_t start, size_t end)
+{
+	char	*str;
+
+	str = malloc(end - start + 1);
+	while (start < end)
+	{
+		str[start] = s[start];
+		start++;
+	}
+	str[start] = '\0';
+	return (str);
+}
+
+char	**ft_assign_arr(char **arr, char const *s, char c)
+{
+	size_t	wordcount;
+	size_t	i;
+	size_t	start;
+
+	wordcount = 0;
+	i = 0;
+	while (s[i])
+	{
+		while (s[i] && s[i] != c)
+			i++;
+		start = i;
+		while (s[i] && s[i] == c)
+			i++;
+		if (i > start)
+		{
+			arr[wordcount] = ft_assign_str(s, start, i);
+			if (!arr[wordcount])
+			{
+				return (NULL);
+				while (wordcount)
+					free(arr[wordcount--]);
+			}
+		}
+		wordcount++;
+	}
+	arr[wordcount] = NULL;
+	return (arr);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	words;
-	size_t	i;
-	char	**str_arr;
+	size_t	wordcount;
+	char	**arr;
 
-	words = ft_count_words(s, c);
-	i = 0;
-	str_arr = malloc(words + 1);
-	if (!str_arr)
+	wordcount = ft_count_words(s, c);
+	arr = malloc(sizeof(char *) * (wordcount + 1));
+	if (!arr)
 		return (NULL);
-	return (ft_allocate_arr(str_arr, s, c));
+	return (ft_assign_arr(arr, s, c));
+	return (arr);
+}
+
+int	main(void)
+{
+	char	**res;
+	size_t	i;
+
+	res = ft_split("   hello world i kkk   ", ' ');
+	i = 0;
+	while (res[i])
+		printf("\"%s\"\n", res[i++]);
 }

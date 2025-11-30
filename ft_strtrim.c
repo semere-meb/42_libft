@@ -31,11 +31,16 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	left;
 	size_t	right;
 
-	left = 0;
+	if (!s1 || !set)
+		return (NULL);
 	right = ft_strlen(s1);
-	while (left < right && ft_ismember(s1[left], set))
+	if (right == 0)
+		return (ft_strdup(s1));
+	left = 0;
+	right--;
+	while (s1[left] && ft_ismember(s1[left], set))
 		left++;
-	while (left < right && ft_ismember(s1[right], set))
+	while (right >= left && ft_ismember(s1[right], set))
 		right--;
-	return (ft_substr(s1, left, right - left));
+	return (ft_substr(s1, left, right - left + 1));
 }
