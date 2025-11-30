@@ -26,6 +26,7 @@ static int	ft_ismember(const char c, char const *set)
 	return (0);
 }
 
+// comment
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	left;
