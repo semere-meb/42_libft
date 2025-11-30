@@ -6,101 +6,90 @@
 /*   By: semebrah <semebrah@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 10:50:48 by semebrah          #+#    #+#             */
-/*   Updated: 2025/11/27 11:24:30 by semebrah         ###   ########.fr       */
+/*   Updated: 2025/11/30 20:43:06 by semebrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-// comment test
-size_t	ft_count_words(char const *s, char c)
+static int	ft_strs_len(char const *s, char c)
 {
-	size_t	wordcount;
-	size_t	i;
 	size_t	start;
+	size_t	i;
+	size_t	count;
 
-	wordcount = 0;
+	start = 0;
 	i = 0;
+	count = 0;
 	while (s[i])
 	{
-		while (s[i] && s[i] != c)
-			i++;
-		start = 0;
 		while (s[i] && s[i] == c)
-			i++;
-		if (i > start)
-			wordcount++;
-	}
-	return (wordcount);
-}
-
-char	*ft_assign_str(char const *s, size_t start, size_t end)
-{
-	char	*str;
-
-	str = malloc(end - start + 1);
-	while (start < end)
-	{
-		str[start] = s[start];
-		start++;
-	}
-	str[start] = '\0';
-	return (str);
-}
-
-char	**ft_assign_arr(char **arr, char const *s, char c)
-{
-	size_t	wordcount;
-	size_t	i;
-	size_t	start;
-
-	wordcount = 0;
-	i = 0;
-	while (s[i])
-	{
-		while (s[i] && s[i] != c)
 			i++;
 		start = i;
+		while (s[i] && s[i] != c)
+			i++;
+		if (i > start)
+			count++;
+	}
+	return (count);
+}
+
+static char	*allocate_string(char const *s, int start, int end)
+{
+	char	*new;
+	int		i;
+
+	if (start > end)
+		return (NULL);
+	new = malloc((end - start + 1) * sizeof(char));
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (s[start] && start < end)
+		new[i++] = s[start++];
+	new[i] = '\0';
+	return (new);
+}
+
+static char	**allocate_array(char **array, char const *s, char c)
+{
+	size_t	start;
+	size_t	i;
+	size_t	index;
+
+	start = 0;
+	i = 0;
+	index = 0;
+	while (s[i])
+	{
 		while (s[i] && s[i] == c)
+			i++;
+		start = i;
+		while (s[i] && s[i] != c)
 			i++;
 		if (i > start)
 		{
-			arr[wordcount] = ft_assign_str(s, start, i);
-			if (!arr[wordcount])
-			{
-				return (NULL);
-				while (wordcount)
-					free(arr[wordcount--]);
-			}
+			array[index] = allocate_string(s, start, i);
+			if (!array[index])
+				while (index-- > 0)
+					free(array[index]);
+			index++;
 		}
-		wordcount++;
 	}
-	arr[wordcount] = NULL;
-	return (arr);
+	array[index] = NULL;
+	return (array);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	wordcount;
-	char	**arr;
+	int		arr_len;
+	char	**array;
 
-	wordcount = ft_count_words(s, c);
-	arr = malloc(sizeof(char *) * (wordcount + 1));
-	if (!arr)
+	if (!s)
 		return (NULL);
-	return (ft_assign_arr(arr, s, c));
-	return (arr);
-}
-
-int	main(void)
-{
-	char	**res;
-	size_t	i;
-
-	res = ft_split("   hello world i kkk   ", ' ');
-	i = 0;
-	while (res[i])
-		printf("\"%s\"\n", res[i++]);
+	arr_len = ft_strs_len(s, c);
+	array = malloc((arr_len + 1) * sizeof(char *));
+	if (!array)
+		return (NULL);
+	return (allocate_array(array, s, c));
 }

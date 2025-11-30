@@ -10,51 +10,52 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdlib.h>
 
-static char	*ft_populate(char *str, long n, int is_negative)
+static char	*ft_assign_str(char *str, long n, int is_negative,
+		size_t digit_count)
 {
 	size_t	i;
 
-	i = 0;
-	if (n == 0)
-		str[i] = '0';
-	if (is_negative)
-		str[i++] = '-';
+	str[digit_count--] = '\0';
 	while (n > 0)
 	{
-		str[i++] = '0' + n % 10;
+		str[digit_count--] = '0' + n % 10;
 		n /= 10;
 	}
-	str[i] = '\0';
+	if (is_negative)
+		str[digit_count] = '-';
 	return (str);
 }
 
-static size_t	ft_count_chars(long _n)
+static size_t	ft_count_digits(long n)
 {
-	size_t	char_count;
+	size_t	digit_count;
 
-	char_count = 0;
-	if (_n == 0)
-		return (1);
-	while (_n > 0)
+	digit_count = 0;
+	while (n > 0)
 	{
-		char_count++;
-		_n /= 10;
+		digit_count++;
+		n /= 10;
 	}
-	return (char_count);
+	return (digit_count);
 }
 
 char	*ft_itoa(int n)
 {
 	long	_n;
 	char	*str;
+	size_t	digit_count;
 
+	if (n == 0)
+		return (ft_strdup("0"));
 	_n = n;
 	if (_n < 0)
 		_n *= -1;
-	str = malloc((n < 0) + ft_count_chars(_n) + 1);
+	digit_count = ft_count_digits(_n);
+	str = malloc((n < 0) + digit_count + 1);
 	if (!str)
 		return (NULL);
-	return (ft_populate(str, _n, (n < 0)));
+	return (ft_assign_str(str, _n, (n < 0), digit_count));
 }
