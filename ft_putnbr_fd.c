@@ -24,5 +24,5 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	if (_n > 9)
 		ft_putnbr_fd(_n / 10, fd);
-	write(fd, (char []){'0' + _n % 10}, 1);
+	write(fd, (char[]){'0' + _n % 10}, 1);
 }
