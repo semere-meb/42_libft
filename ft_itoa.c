@@ -15,8 +15,6 @@
 static char	*ft_assign_str(char *str, long n, int is_negative,
 		size_t digit_count)
 {
-	size_t	i;
-
 	str[digit_count--] = '\0';
 	while (n > 0)
 	{
