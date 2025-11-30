@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 static char	*ft_assign_str(char *str, long n, int is_negative,
 		size_t digit_count)
