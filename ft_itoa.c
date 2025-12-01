@@ -54,5 +54,5 @@ char	*ft_itoa(int n)
 	str = malloc((n < 0) + digit_count + 1);
 	if (!str)
 		return (NULL);
-	return (ft_assign_str(str, _n, (n < 0), digit_count));
+	return (ft_assign_str(str, _n, (n < 0), (n < 0) + digit_count));
 }
