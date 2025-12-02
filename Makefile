@@ -67,7 +67,7 @@ HEADER = libft.h
 
 all: $(NAME)
 
-%.o: %.c $(HEADER)
+%.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(NAME): $(OBJS)
