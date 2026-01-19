@@ -51,6 +51,14 @@ static char	*allocate_string(char const *s, int start, int end)
 	return (new);
 }
 
+static void	*free_array(char **array, size_t index)
+{
+	while (index-- > 0)
+		free(array[index]);
+	free(array);
+	return (NULL);
+}
+
 static char	**allocate_array(char **array, char const *s, char c)
 {
 	size_t	start;
@@ -71,8 +79,7 @@ static char	**allocate_array(char **array, char const *s, char c)
 		{
 			array[index] = allocate_string(s, start, i);
 			if (!array[index])
-				while (index-- > 0)
-					free(array[index]);
+				return (free_array(array, index));
 			index++;
 		}
 	}
