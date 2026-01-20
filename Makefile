@@ -63,6 +63,22 @@ BONUS_SRCS = ft_lstadd_back.c \
 
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
+GNL_SRCS = get_next_line/get_next_line_bonus.c \
+	get_next_line/get_next_line_utils_bonus.c
+
+GNL_OBJS = $(GNL_SRCS:.c=.o)
+
+FT_PRINTF_SRCS = ft_printf/converter.c \
+	ft_printf/ft_printf.c \
+	ft_printf/handlers1.c \
+	ft_printf/handlers2.c \
+	ft_printf/parser.c \
+	ft_printf/printers1.c \
+	ft_printf/printers2.c \
+	ft_printf/utils.c
+
+FT_PRINTF_OBJS = $(FT_PRINTF_SRCS:.c=.o)
+
 HEADER = libft.h
 
 all: $(NAME)
@@ -70,14 +86,11 @@ all: $(NAME)
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(BONUS_OBJS) $(GNL_OBJS) $(FT_PRINTF_OBJS)
 	ar rcs $@ $^
 
-bonus: $(OBJS) $(BONUS_OBJS)
-	ar rcs $(NAME) $^
-
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS) $(GNL_OBJS) $(FT_PRINTF_OBJS)
 
 fclean: clean
 	rm -f $(NAME)
