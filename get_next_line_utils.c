@@ -10,24 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
-}
-
-void	*ft_memset(void *s, int c, size_t n)
-{
-	while (n > 0)
-		((char *)s)[--n] = (char)c;
-	return (s);
-}
+#include "libft.h"
 
 ssize_t	get_index(const char *s, char c, size_t size)
 {

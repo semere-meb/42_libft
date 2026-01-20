@@ -47,11 +47,8 @@ SRCS = ft_atoi.c \
 	ft_strtrim.c \
 	ft_substr.c \
 	ft_tolower.c \
-	ft_toupper.c
-
-OBJS = $(SRCS:.c=.o)
-
-BONUS_SRCS = ft_lstadd_back.c \
+	ft_toupper.c \
+	ft_lstadd_back.c \
 	ft_lstadd_front.c \
 	ft_lstclear.c \
 	ft_lstdelone.c \
@@ -59,25 +56,19 @@ BONUS_SRCS = ft_lstadd_back.c \
 	ft_lstlast.c \
 	ft_lstmap.c \
 	ft_lstnew.c \
-	ft_lstsize.c
+	ft_lstsize.c \
+	get_next_line.c \
+	get_next_line_utils.c \
+	converter.c \
+	ft_printf.c \
+	handlers1.c \
+	handlers2.c \
+	parser.c \
+	printers1.c \
+	printers2.c \
+	utils.c
 
-BONUS_OBJS = $(BONUS_SRCS:.c=.o)
-
-GNL_SRCS = get_next_line/get_next_line_bonus.c \
-	get_next_line/get_next_line_utils_bonus.c
-
-GNL_OBJS = $(GNL_SRCS:.c=.o)
-
-FT_PRINTF_SRCS = ft_printf/converter.c \
-	ft_printf/ft_printf.c \
-	ft_printf/handlers1.c \
-	ft_printf/handlers2.c \
-	ft_printf/parser.c \
-	ft_printf/printers1.c \
-	ft_printf/printers2.c \
-	ft_printf/utils.c
-
-FT_PRINTF_OBJS = $(FT_PRINTF_SRCS:.c=.o)
+OBJS = $(SRCS:.c=.o)
 
 HEADER = libft.h
 
@@ -86,11 +77,11 @@ all: $(NAME)
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(NAME): $(OBJS) $(BONUS_OBJS) $(GNL_OBJS) $(FT_PRINTF_OBJS)
+$(NAME): $(OBJS)
 	ar rcs $@ $^
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS) $(GNL_OBJS) $(FT_PRINTF_OBJS)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
